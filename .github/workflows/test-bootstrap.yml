@@ -1,0 +1,24 @@
+name: Test vcpkg-tool bootstrapping
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  bootstrap:
+    runs-on: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+#      - uses: actions/checkout@v3
+
+      - name: Get the branch of vcpkg that contains the changes
+        run: git clone https://github.com/michaelbprice/vcpkg -b vcpkg-tool-data
+
+      - name: Boostrap
+        run: ./bootstrap-vcpkg
+        
+      - name: Check version
+        run: ./vcpkg --version
