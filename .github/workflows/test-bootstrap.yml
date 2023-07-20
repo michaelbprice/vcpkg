@@ -15,7 +15,7 @@ jobs:
         run: git clone https://github.com/michaelbprice/vcpkg -b vcpkg-tool-data
 
       - name: Boostrap
-        run: ./bootstrap-vcpkg
+        run: ./bootstrap-vcpkg.sh
         
       - name: Check version
         run: ./vcpkg --version
