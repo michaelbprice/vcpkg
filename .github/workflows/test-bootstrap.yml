@@ -14,6 +14,12 @@ jobs:
       - name: Get the branch of vcpkg that contains the changes
         run: git clone https://github.com/michaelbprice/vcpkg -b vcpkg-tool-data
 
+      - name: Pick different vcpkg-tool
+        run: |
+          echo "VCPKG_TOOL_RELEASE_TAG=2023-06-22" > ./.vcpkg-tool
+          echo "VCPKG_GLIBC_SHA=0afa55096856575f4b6ade5fc0087925dc1288bb3dd51c99e41824c1e23151a3101553d965bd1f589b0c42e4c9e57e568bd475517f5df21873bb8c29dd94f8b3" >> ./.vcpkg-tool
+        working-directory: ./vcpkg
+
       - name: Boostrap
         run: ./bootstrap-vcpkg.sh
         working-directory: ./vcpkg
