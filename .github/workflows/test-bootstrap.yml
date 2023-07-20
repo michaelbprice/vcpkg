@@ -10,26 +10,17 @@ jobs:
     
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-#      - uses: actions/checkout@v3
 
       - name: Get the branch of vcpkg that contains the changes
         run: git clone https://github.com/michaelbprice/vcpkg -b vcpkg-tool-data
-        
-      - name: Check vcpkg commits
-        run: git log --pretty=oneline -10 && git show HEAD
-        working-directory: ./vcpkg
 
       - name: Pick different vcpkg-tool
         run: |
           echo "VCPKG_TOOL_RELEASE_TAG=2023-07-19" > ./.vcpkg-tool
           echo "VCPKG_GLIBC_SHA=2338c759b14257f0167202886080bc872a6ea2578b27b034d2432b209e99d81e8d37f4a1ce215e5d4875648a89ff5bc9bfb560b824c87163572233262d5581c5" >> ./.vcpkg-tool
-        working-directory: ./vcpkg
-        
-      - name: Echo updated vcpkg-tool file
-        run: cat ./.vcpkg-tool
         working-directory: ./vcpkg
 
       - name: Boostrap
