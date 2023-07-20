@@ -33,12 +33,12 @@ jobs:
         working-directory: ./vcpkg
 
       - name: Boostrap
-        if: ${{ runner.os != "Windows" }}
+        if: ${{ runner.os != 'Windows' }}
         run: ./bootstrap-vcpkg.sh
         working-directory: ./vcpkg
         
       - name: Boostrap
-        if: ${{ runner.os == "Windows" }}
+        if: ${{ runner.os == 'Windows' }}
         run: ./bootstrap-vcpkg.bat
         working-directory: ./vcpkg
 
