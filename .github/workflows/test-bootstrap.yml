@@ -25,7 +25,7 @@ jobs:
         working-directory: ./vcpkg
 
       - name: Boostrap
-        run: bootstrap-vcpkg.sh
+        run: ./bootstrap-vcpkg.sh
         working-directory: ./vcpkg
         
       - name: Check version
