@@ -34,10 +34,10 @@ jobs:
 
       - name: Boostrap
         if: ${{ runner.os != 'Windows' }}
-        run: ./bootstrap-vcpkg.sh && vcpkg --version
+        run: ./bootstrap-vcpkg.sh && ./vcpkg --version
         working-directory: ./vcpkg
         
       - name: Boostrap
         if: ${{ runner.os == 'Windows' }}
-        run: ./bootstrap-vcpkg.bat && vcpkg.exe --version
+        run: ./bootstrap-vcpkg.bat && ./vcpkg.exe --version
         working-directory: ./vcpkg
