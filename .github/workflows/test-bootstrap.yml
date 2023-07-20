@@ -17,6 +17,10 @@ jobs:
 
       - name: Get the branch of vcpkg that contains the changes
         run: git clone https://github.com/michaelbprice/vcpkg -b vcpkg-tool-data
+        
+      - name: Check vcpkg commits
+        run: git log --pretty=oneline -N10 && git show HEAD
+        working-directory: ./vcpkg
 
       - name: Pick different vcpkg-tool
         run: |
