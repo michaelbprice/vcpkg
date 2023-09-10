@@ -1,0 +1,34 @@
+name: Test vcpkg-tool bootstrapping
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  bootstrap:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+
+      - name: Get the branch of vcpkg that contains the changes
+        run: git clone https://github.com/michaelbprice/vcpkg -b vcpkg-tool-data
+
+      - name: Pick different vcpkg-tool
+        run: |
+          echo "VCPKG_TOOL_RELEASE_TAG=2023-07-19" > ./.vcpkg-tool
+          echo "VCPKG_GLIBC_SHA=2338c759b14257f0167202886080bc872a6ea2578b27b034d2432b209e99d81e8d37f4a1ce215e5d4875648a89ff5bc9bfb560b824c87163572233262d5581c5" >> ./.vcpkg-tool
+        working-directory: ./vcpkg
+
+      - name: Boostrap
+        if: ${{ runner.os != 'Windows' }}
+        run: ./bootstrap-vcpkg.sh && ./vcpkg --version
+        working-directory: ./vcpkg
+        
+      - name: Boostrap
+        if: ${{ runner.os == 'Windows' }}
+        run: ./bootstrap-vcpkg.bat && ./vcpkg.exe --version
+        working-directory: ./vcpkg
